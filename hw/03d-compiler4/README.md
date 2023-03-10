@@ -1,3 +1,49 @@
+# Compilery作業修改
+```
+void Do(){
+int doBegin = nextLabel();
+  int doEnd = nextLabel();
+  emit("(L%d)\n", doBegin);
+  skip("do");
+  BLOCK();
+  skip("while");
+  skip("(");
+  int e = E();
+  emit("if  T%d goto L%d\n", e, doBegin);
+  skip(")");
+  emit("(L%d)\n", doEnd);
+  
+}
+void STMT() {
+  if (isNext("while"))
+    return WHILE();
+  else if (isNext("if"))
+    IF();
+  else if (isNext("{"))
+    BLOCK();
+  else if (isNext("do"))
+    Do();
+  else
+    ASSIGN();
+}
+```
+## 執行結果
+```
+./compiler2.exe test/example.c
+============ parse =============
+t0 = 10
+a = t0
+(L0)
+t1 = a
+t2 = 1
+t3 = t1 + t2
+a = t3
+t4 = a
+t5 = 20
+t6 = t4 < t5
+if  T6 goto L0
+(L1)
+```
 # Compiler
 
 ## 語法
