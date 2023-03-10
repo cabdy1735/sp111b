@@ -27,6 +27,14 @@ void STMT() {
     ASSIGN();
 }
 ```
+## example.c
+```
+a = 10;
+   do {
+      a = a + 1;
+   }while( a < 20 );
+
+```
 ## 執行結果
 ```
 ./compiler2.exe test/example.c
